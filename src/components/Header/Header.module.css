@@ -1,0 +1,41 @@
+.header {
+  border: solid 2px rgb(0, 255, 221);
+    display: flex;
+    justify-content: center;
+    padding: 0.9em;
+    background-color: rgb(0, 0, 0);
+    margin-bottom: 3.5em;
+    flex-wrap: wrap;
+  }
+  .container {
+border: solid 1px red;
+display: inline-flex;
+width: 60em;
+  }
+  .logoContainer {
+    border: solid 1px green;
+    flex-grow: 1;
+    /* align-self: center; */
+    padding: 0em 0.5% 0.1em;
+    max-width: 10em;
+  }
+  
+  .logo {
+    border: solid 1px red;
+    color: rgb(255, 255, 255);
+    font-size: 1.8em;
+    text-decoration: none;
+    
+  }
+  
+  .title {
+    color: rgb(255, 255, 255);
+  }
+  
+  @media screen and (max-width: 600px) {
+    .logoContainer {
+      /* Centre logo */
+      flex-grow: 0;
+      margin: 0 auto 0.5em auto;
+    }
+  }

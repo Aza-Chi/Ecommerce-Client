@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { Outlet } from "react-router-dom";
+import Header from './components/Header/Header';
 
-function App() {
+
+export async function authLoader() {
+  // https://reactrouter.com/en/main/start/tutorial#loading-data
+  // https://reactrouter.com/en/main/route/loader
+  try {
+    const res = await fetch(
+      `${process.env.REACT_APP_API_BASE_URL}/auth/status`,
+      { credentials: "include" }
+    );
+    if (res.ok) {
+      const authData = await res.json();
+      return authData;
+    }
+    throw new Error("Unexpected status code.");
+  } catch (error) {
+    return { logged_in: false, id: null, email_address: null, auth_method: null };
+  }
+}
+
+export function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Header />
+       <main>
+        <Outlet />
+      </main>
+       
     </div>
   );
 }
 
-export default App;
+
+// <header className="App-header">
+// <img src={logo} className="App-logo" alt="logo" />
+// <p>
+//   Edit <code>src/App.js</code> and save to reload.
+// </p>
+// <a
+//   className="App-link"
+//   href="https://reactjs.org"
+//   target="_blank"
+//   rel="noopener noreferrer"
+// >
+//   Learn React
+// </a>
+// </header>

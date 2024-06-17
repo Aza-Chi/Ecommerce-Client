@@ -1,4 +1,27 @@
+/* White margins around app.js so need this */
+ body {    
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* If it stops working 
+open public/index.html and set the margin to 0 using inline styles like this:
+
+<body style=margin:0>
+https://stackoverflow.com/questions/51006397/cant-remove-margins-on-react-web-app
+*/
+
 /* ===== Page Layout & Spacing ===== */
+
+body {
+  /* background-color: rgb(27, 27, 27); */
+  /* color: white; */
+  /* border: solid 10px red; */
+  padding: 0;
+  margin: 0;
+  
+}
+
+
 
 .pagePadding {
   padding: 0 12.5% 4em 15.5%;

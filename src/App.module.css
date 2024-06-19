@@ -2,6 +2,10 @@
  body {    
   margin: 0 !important;
   padding: 0 !important;
+  background-color: rgb(247, 247, 247);
+  width: 100%; 
+  overflow-x: hidden; /*Stop horizontal scroll */
+  
 }
 /* If it stops working 
 open public/index.html and set the margin to 0 using inline styles like this:
@@ -11,17 +15,6 @@ https://stackoverflow.com/questions/51006397/cant-remove-margins-on-react-web-ap
 */
 
 /* ===== Page Layout & Spacing ===== */
-
-body {
-  /* background-color: rgb(27, 27, 27); */
-  /* color: white; */
-  /* border: solid 10px red; */
-  padding: 0;
-  margin: 0;
-  
-}
-
-
 
 .pagePadding {
   padding: 0 12.5% 4em 15.5%;
@@ -99,8 +92,8 @@ body {
   justify-content: center;
   min-height: 2.2em;
   padding: 0.5em 2em;
-  background-color: rgb(255, 216, 20);
-  border: 2px solid rgb(252, 210, 0);
+  background-color: rgb(0, 162, 211);
+  border: 2px solid rgb(0, 156, 191);
   border-radius: 25px;
   box-shadow: 0 2px 5px rgb(217, 217, 217);
   color: rgb(15, 17, 17);
@@ -112,17 +105,26 @@ body {
 .button:focus,
 .button:hover {
   cursor: pointer;
-  background-color: rgb(247, 202, 0);
-  border: 2px solid rgb(242, 194, 0);
+  background-color: rgb(0, 162, 211);
+  border: 2px solid rgb(0, 156, 191);
 }
 
 .button:active {
-  background-color: rgb(240, 184, 0);
+  background-color: rgb(0, 124, 165);
   border: 2px solid rgb(0, 180, 240);
   box-shadow: 0 2px 5px rgb(200, 240, 250);
 }
 
+/*
+    background-color: rgb(0, 162, 211);
+    border: none;
+    border-radius: 0 5px 5px 0;
+  }
+  
+  .btn:hover {
+    background-color: rgb(0, 195, 255);
 
+*/
 /* ===== Forms ===== */
 
 .stackedForm {

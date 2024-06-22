@@ -8,8 +8,10 @@ import FacebookAuthButton from "./FacebookAuthButton";
 
 
 export async function loginAction({ request }) {
+  
   let formData = await request.formData();
   try {
+    //console.log(request);
     const usernameOrEmail = formData.get("email_address");
     const password = formData.get("password");
     console.log(`Attempting Login with credentials: ${usernameOrEmail} + ${password}`);
@@ -18,8 +20,19 @@ export async function loginAction({ request }) {
     const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, { 
       usernameOrEmail, 
       password },
-      // { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
+    console.log("LoginPage: Received this response: ");
+    console.log(response);
+    console.log(response.data);
+    console.log(`response.cookie`);
+    console.log(response.cookie);
+    // console.log(response.data.token);
+    // localStorage.setItem('token', response.data.token);
+    // console.log(localStorage.getItem('token'));
+    // const authData = response.data;
+    
+    // console.log(response.data.token); // For JWT 
 
     if (response.status === 200) {
       let redirectPath = new URL(request.url).searchParams.get("redirect");

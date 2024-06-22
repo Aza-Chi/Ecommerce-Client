@@ -34,12 +34,13 @@ export async function authLoader() {
   try {
     
     console.log(`App.js - Fetching auth/status`);
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
+    //console.log(`App.js - token is: ${token}`);
     const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/status`, {
       headers: {
-        'Authorization': `${token}`, // Include JWT token as Bearer token
+        //'Authorization': `Bearer ${token}`, // Include JWT token as Bearer token
       },
-      //withCredentials: true, // If needed for CORS with credentials
+      withCredentials: true, // If needed for CORS with credentials
     });
     
     // Testing
@@ -49,7 +50,8 @@ export async function authLoader() {
 
     if (res.status === 200) {
       const authData = res.data;
-      console.log('authData:', authData);
+      console.log('App.js - res.status=== 200:');
+      console.log('App.js - authData:', authData);
       
       return authData;
     }

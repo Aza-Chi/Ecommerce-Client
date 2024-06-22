@@ -4,7 +4,7 @@
     justify-content: center;
     padding: 0.9em;
     background-color: rgb(0, 0, 0);
-    margin-bottom: 3.5em;
+    margin-bottom: 2.1em;
     flex-wrap: wrap;
     width: 100%;
   }
@@ -14,27 +14,51 @@ display: inline-flex;
 width: 60em;
   }
   .logoContainer {
-    border: solid 1px green;
+    border: solid 2px rgb(61, 126, 0);
     
     flex-grow: 1;
-    /* align-self: center; */
-    padding: 0em 0.5% 0.1em;
+    align-self: center;
+    
+    padding: 0em 0.5% 0.1em 1em;
     max-width: 10em;
   }
   .logoContainer2 {
-    border: solid 1px cyan;
+    border: solid 2px cyan;
     max-width: 11em;
     max-height: 2em;;
-  }
-  
-  .logo {
-    border: solid 1px red;
-    color: rgb(255, 255, 255);
-    font-size: 1.8em;
-    text-decoration: none;
     
   }
   
+  .logo {
+    
+    border: solid 2px red;
+    color: rgb(255, 255, 255);
+    font-size: 1.8em;
+    text-decoration: none;
+    justify-content: center;
+    justify-self: center;
+    
+    
+  }
+  
+  @-moz-document url-prefix() {
+    .logo {
+      /* red */
+/* margin: 0% 2% 5% 0%; */
+
+    }
+    .logoContainer1 {
+      /* green */
+      /* margin: 1em 2em 3em 4em; */
+      /* padding: 0em 0em 2em 0em; */
+    }
+    .logoContainer2 {
+      /* cyan */
+      /* margin: 1em 2em 3em 4em; */
+      padding: 0em 0em 2em 0em;
+    }
+  }
+
   .title {
     color: rgb(255, 255, 255);
   }

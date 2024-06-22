@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
 import MainNav from "../MainNav/MainNav";
 import styles from "./Header.module.css";
+//import SearchBar from "../SearchBar/SearchBar";
 
 export default function Header() {
   return (

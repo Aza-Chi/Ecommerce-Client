@@ -191,3 +191,16 @@ https://stackoverflow.com/questions/51006397/cant-remove-margins-on-react-web-ap
   margin-top: 2.5em;
   font-style: italic;
 }
+
+
+/* ===== Register ===== */
+.passwordCheck {
+  margin-top: 0.5rem;
+  padding: 0.2rem;
+  margin-bottom: 1em;
+  background: rgb(237, 237, 237);
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2em;
+  /* text-align: center; */
+}

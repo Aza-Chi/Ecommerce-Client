@@ -5,6 +5,8 @@ import { productFeedLoader } from "./features/products/ProductFeed.js";
 import ProductFeed from "./features/products/ProductFeed"; // default exports so import without curly braces
 import AccountPage from "./components/AccountPage/AccountPage";
 import { ordersLoader } from "./features/orders/OrderHistory";
+import AddressPage from "./components/AddressPage/AddressPage";
+import { addressLoader } from "./components/AddressPage/Addresses.js"
 import { RegisterPage, registerAction } from "./features/auth/RegisterPage";
 import { LoginPage, loginAction } from "./features/auth/LoginPage";
 import {
@@ -45,6 +47,11 @@ export const router = createBrowserRouter([
         path: "account",
         element: <AccountPage />,
         loader: ordersLoader,
+      },
+      {
+        path: "addresses",
+        element: <AddressPage />,
+        loader: addressLoader,
       },
       {
         path: "register",
@@ -101,17 +108,3 @@ export const router = createBrowserRouter([
   },
 ]);
 
-/*
-
-
- 
-
-
- 
-
-
-
-
-
-
-*/

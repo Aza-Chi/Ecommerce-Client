@@ -1,0 +1,56 @@
+.feedItem {
+  border: 1px solid #ddd; /* Border around each card */
+  background: #fff; /* Card background color */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional box shadow */
+  width: 240px; 
+  margin: 2px; /* Margin between product */
+  overflow: hidden; /* Ensure content doesn't overflow */
+  text-align: center; /*Center align text*/
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+  
+}
+
+.feedItem:hover {
+  transform: translateY(-5px); /* Slightly lift the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+
+
+  
+  
+  .image {
+    /* https://web.dev/articles/aspect-ratio#example_preventing_layout_shift */
+    /* padding-top: 0.5em; */
+    width: auto;
+    height: auto;
+    max-width: 250px;
+    max-height: 200px;
+    
+    /* aspect-ratio: 1 / 1; */
+  }
+  
+  .textContainer {
+    padding: 0.8em 6% 1.4em 6%;
+    border-top: 1px solid rgb(240, 240, 240);
+    color: rgb(15, 17, 17);
+  }
+  
+  .nameLink {
+    color: rgb(15, 17, 17);
+    text-decoration: underline;
+  }
+  
+
+  .price {
+    margin-top: 0.8em;
+    font-size: 1.1em;
+    font-weight: 700;
+  }
+
+  .date {
+    margin-top: 0.2em;
+    font-size: 0.9em;
+    font-weight: 500;
+  }

@@ -15,7 +15,7 @@ export default function ErrorPage() {
       {is404 ? <Header /> : null}
       
       <main  className={styles.pagePadding}> 
-        <h1 className={styles.h1}>{is404 ? "404 - Page Not Found" : "How did you end up here!?"}</h1>
+        <h1 className={styles.h1}>{is404 ? "404 - Page Not Found" : "Service unavailable"}</h1>
         <p>{is404 ? "This page does not exist." : "An unexpected error has occurred. Somehow you got lost!"}</p>
         <p>Error:</p>
         <p>

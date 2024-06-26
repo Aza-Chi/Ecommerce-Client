@@ -16,19 +16,24 @@ import { formatDate, getStatus } from "./utils";
 //import Rating from "../../components/Rating/Rating"; //Future feature?
 
 export async function addToCartAction({ request, params }) {
-  //console.log(`products/ProductDetails.js - Attempting addToCartAction with params:`, params);
-  //console.log(`${JSON.stringify(params)}`);
-  // Define the parameters to be sent
   const formData = await request.formData();
   const quantity = parseInt(formData.get("quantity"), 10);
   const res = await getStatus();
-  //console.log("1010101010 ProductDetail.js - AddtoCartAction", (res));
-  const customer_id = res.jsonData.id; // Replace with actual customer_id as needed, customer id 0 doesn't exist so good test 
-console.log(`Customer_ID: `, customer_id);
-  const product_id = parseInt(params.id); // Ensure this is the product_id from params
-  
+  const customer_id = res.jsonData.id;
+  const product_id = parseInt(params.id);
 
   try {
+    // Fetch product details to check stock quantity
+    const productRes = await fetch(
+      `${process.env.REACT_APP_API_BASE_URL}/products/${product_id}`
+    );
+    const productData = await productRes.json();
+    const stock_quantity = productData[0].stock_quantity;
+
+    if (quantity > stock_quantity) {
+      return "Error: Requested quantity exceeds available stock.";
+    }
+
     const response = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/shoppingcart`,
       {
@@ -40,7 +45,7 @@ console.log(`Customer_ID: `, customer_id);
     );
 
     if (response.status === 200 || response.status === 201) {
-      const cartLink = <InlineLink path="/shoppingcart" anchor="cart" />;
+      const cartLink = <InlineLink path="/cart" anchor="cart" />;
       return <>Item has been added to your {cartLink}.</>;
     } else if (response.status === 400) {
       return response.data;
@@ -50,6 +55,8 @@ console.log(`Customer_ID: `, customer_id);
     return "Error: Item could not be added to your cart.";
   }
 }
+
+/* */
 
 export async function productDetailLoader({ params }) {
   try {
@@ -96,7 +103,6 @@ export async function productDetailLoader({ params }) {
     return { error: "Error: Product could not be loaded." };
   }
 }
-
 export function ProductDetail() {
   const { productData, error } = useLoaderData();
   const authData = useRouteLoaderData("app");
@@ -107,7 +113,6 @@ export function ProductDetail() {
   }
 
   const {
-    filler_variable,
     product_name,
     product_description,
     price,
@@ -115,10 +120,7 @@ export function ProductDetail() {
     image_url,
     created_at,
     updated_at,
-    //avg_rating, //Future feature?
-    //rating_count,
   } = productData[0];
-  // const imagePath = getProductImagePath(productData.product_id, productData.product_name);
 
   function renderButton() {
     const buttonStyles = `${globalStyles.button} ${styles.button}`;
@@ -131,10 +133,10 @@ export function ProductDetail() {
     } else if (authData.jsonData.logged_in) {
       return (
         <Form method="post">
-                      <label htmlFor="quantity" className={styles.quantityLabel}>
-              Quantity:
-            </label>
-     <input
+          <label htmlFor="quantity" className={styles.quantityLabel}>
+            Quantity:
+          </label>
+          <input
             type="number"
             name="quantity"
             min="1"
@@ -175,11 +177,9 @@ export function ProductDetail() {
           </div>
           <div className={styles.summaryTextContent}>
             <h1 className={styles.productName}>{product_name}</h1>
-
             <p className={styles.price}>£{price}</p>
             <hr />
             <p>{product_description}</p>
-            <p>{filler_variable}</p>
             <hr />
             {stock_quantity >= 1 && stock_quantity <= 5 ? (
               <p>
@@ -190,20 +190,11 @@ export function ProductDetail() {
             {addToCartMessage ? (
               <p className={styles.buttonMessage}>{addToCartMessage}</p>
             ) : null}
-            {/* Rating */}
-            {/* {avg_rating ?
-            <div>
-              <Rating rating={avg_rating} />
-              <div className={styles.ratingText}>Rated {avg_rating}/5.00 based on {rating_count} {rating_count !== 1 ? "ratings" : "rating"}</div>
-            </div>
-            : null} */}
-            {/* Rating end */}
           </div>
         </section>
         <section className={styles.descriptionSection}>
           <h2>Description</h2>
-          <p className={globalStyles.XLText}>{filler_variable}</p>
-          <p>{product_description}</p>
+          <p className={globalStyles.XLText}>{product_description}</p>
           <p>Listed at: {formatDate(created_at)}</p>
           <p>Updated at: {formatDate(updated_at)}</p>
         </section>
@@ -211,8 +202,3 @@ export function ProductDetail() {
     </div>
   );
 }
-
-////////////////////////////////////
-////////////////////////////////////
-////////////////////////////////////
-////////////////////////////////////

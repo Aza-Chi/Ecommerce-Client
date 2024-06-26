@@ -138,3 +138,24 @@ export async function getAddressesByCustomerId(customer_id) {
     throw new Error("Unexpected status code.");
   }
 }
+
+export const getStatusString = (statusId) => {
+  const statusMap = {
+    0: 'Pending',
+    1: 'Confirmed',
+    2: 'Processing',
+    3: 'Dispatched',
+    4: 'In Transit',
+    5: 'Out For Delivery',
+    6: 'Delivered',
+    7: 'Attempted Delivery',
+    8: 'Cancelled',
+    9: 'Awaiting Pickup',
+    10: 'Delayed',
+    11: 'Lost',
+    12: 'Held At Customs',
+    13: 'Contact Support'
+  };
+
+  return statusMap[statusId] || 'Unknown Status';
+};

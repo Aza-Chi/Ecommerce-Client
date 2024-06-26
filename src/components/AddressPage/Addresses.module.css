@@ -1,0 +1,40 @@
+.separator {
+    width: 100%; /* Make separator take the full width of the parent container */
+    margin: 1rem 0; /* Add some vertical spacing */
+    border: none; /* Remove default border */
+    border-top: 1px solid rgb(180, 180, 180); /* Custom border style */
+}
+
+.Addresses {
+    max-width: 40rem;
+    /* border: solid 1px red; */
+    /* padding: 0 1rem; */
+  }
+  
+  
+  .flexContainer {
+    display: flex;
+    align-items: center; /*stops buttons expanding vertically*/
+    justify-content: space-between;
+  }
+  
+  .contentContainer {
+    padding-right: 3em;
+  }
+  
+  .button {
+    padding: 0.6em 0.8em;
+    margin-right: 1em;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 8px;
+  }
+  
+  .button:hover {
+    cursor: pointer;
+    background-color: rgb(215, 215, 215);
+  }
+  
+  .button:active {
+    background-color: rgb(180, 180, 180);
+  }

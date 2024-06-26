@@ -5,7 +5,7 @@ import InlineLink from "../InlineLink/InlineLink";
 import { Addresses } from "./Addresses";
 import { AddressForm } from "./AddressForm";
 import { useLoaderData } from 'react-router-dom';
-//import styles from "./AddressPage.module.css";
+import styles from "./Addresses.module.css";
 import globalStyles from "../../App.module.css";
 //pagePadding
 
@@ -39,7 +39,7 @@ export default function AddressPage() {
         <Addresses />
         {/*  */}
       {/* <Addresses addressesData={addressesData} />  can pass addressesData through here as a prop if we only used the loader in AddressPage*/}
-        <hr className={globalStyles.separator} />
+        
         <div className={globalStyles.addAddressForm}>
         <h3>Add New Address:</h3>
         {/*3. pass customer_id to Address Form */}

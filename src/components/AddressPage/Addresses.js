@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { getStatus } from "../../features/products/utils";
 //import OrderSummary from "./OrderSummary";
 import globalStyles from "../../App.module.css";
+import styles from "./Addresses.module.css"
 
 export async function addressLoader() {
   // https://reactrouter.com/en/main/start/tutorial#loading-data
@@ -68,25 +69,33 @@ export function Addresses() {
       return <p>You have no addresses to display. Please add an address for delivery.</p>;
     }
 
+
     return (
-      <div>
+      <div className={styles.Addresses}>
         {addressesData.map((address, index) => (
-          
-          <div key={index} className="address">
-            <hr className={globalStyles.separator} />
-            <p>{address.address_line_1}, {address.address_line_2}</p>
-            {/* <p></p> */}
-            <p>City: {address.city}</p>
-            <p>Country: {address.country}</p>
-            <p>Postcode: {address.postcode}</p>
-            {/* <p>Address_ID: {address.address_id}</p> */}
-            <button onClick={() => handleRemoveAddress(address.address_id)}>Remove Address</button>
-            
+          <div key={index}>
+            <hr className={styles.separator} />
+            <div className={styles.flexContainer}>
+              <div className={styles.contentContainer}>
+                <p>{address.address_line_1}, {address.address_line_2}</p>
+                <p>City: {address.city}</p>
+                <p>Country: {address.country}</p>
+                <p>Postcode: {address.postcode}</p>
+              </div>
+              <button 
+                className={styles.button} 
+                onClick={() => handleRemoveAddress(address.address_id)}
+              >
+                Remove Address
+              </button>
+            </div>
           </div>
         ))}
+        <hr className={styles.separator} />
       </div>
     );
   }
+
 
   return (
     <div>

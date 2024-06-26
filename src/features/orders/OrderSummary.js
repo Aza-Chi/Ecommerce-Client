@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./OrderSummary.module.css";
 import globalStyles from "../../App.module.css";
 import { formatDate } from "../products/utils";
+import { getStatusString } from "./utils";
 
 export default function OrderSummary({ orderData, lastItem }) {
   const { order_id, created_at, status_id, total_amount, customer_id } = orderData;
@@ -9,6 +10,7 @@ export default function OrderSummary({ orderData, lastItem }) {
   const formattedDate = formatDate(created_at);
   const orderDetailsPath = `/orders/${order_id}`;
 
+  
   return (
     <div className={styles.orderSummary}>
       <hr className={globalStyles.separator} />
@@ -16,7 +18,7 @@ export default function OrderSummary({ orderData, lastItem }) {
         <div className={styles.contentContainer}>
           <strong>
             {/* <p>Order Summary:</p> */}
-            <Link to={orderDetailsPath} className={`${globalStyles.largeText} ${globalStyles.link}`}>Order ID: #{order_id}, Status: {status_id}</Link>
+            <Link to={orderDetailsPath} className={`${globalStyles.largeText} ${globalStyles.link}`}>Order ID: #{order_id}, Status: {getStatusString(status_id)}</Link>
           </strong>
           <div className={`${globalStyles.mt1rem} ${globalStyles.smallText} ${globalStyles.bold}`}>{formattedDate}</div>
           {/* Div below is for test purposes */}

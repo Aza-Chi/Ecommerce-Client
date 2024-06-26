@@ -59,25 +59,6 @@ export async function cartLoader() {
   }
 }
 
-//Backup cartLoader
-// export async function cartLoader() {
-
-//   try {
-//     const res = await fetch(
-//       `${process.env.REACT_APP_API_BASE_URL}/shoppingcart`,
-//       { credentials: "include" }
-//     );
-//     if (res.ok) {
-//       const cartData = await res.json();
-//       return { cartData };
-//     }
-//     throw new Error("Unexpected status code.");
-//   } catch (error) {
-//     return { cartLoaderError: "Sorry, your cart could not be loaded. Please try again later." };
-//   }
-// }
-
-// end
 
 export function Cart() {
   const authData = useRouteLoaderData("app");

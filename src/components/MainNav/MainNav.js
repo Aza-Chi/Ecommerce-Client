@@ -56,6 +56,7 @@ export default function MainNav() {
       {authData.jsonData?.logged_in ?
       <ul className={styles.navList}>
         {renderNavItem("/account", "Account")}
+        {renderNavItem("/addresses", "Addresses")}
         {renderNavItem("/cart", "Cart")}
         {renderNavItem("#", "Log Out", handleClickLogOut)}
       </ul>

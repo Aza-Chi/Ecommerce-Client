@@ -92,11 +92,11 @@ export const router = createBrowserRouter([
         action: checkoutAction,
       },
       {
-        path: "checkout/:orderId/payment",
+        path: "checkout/:order_id/payment",
         element: <PaymentPage />,
       },
       {
-        path: "checkout/:orderId/payment-return",
+        path: "checkout/:order_id/payment-return",
         element: <PaymentReturn />,
       },
       {

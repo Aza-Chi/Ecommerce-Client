@@ -16,39 +16,32 @@ import axios from "axios";
 // https://reactrouter.com/en/main/start/tutorial#loading-data
 // https://reactrouter.com/en/main/route/loader
 export async function cartLoader() {
-  
   try {
-    // Call the status route to get the customer ID
-    //console.log(`Cart.js - attempting /status`);
     const res = await getStatus();
-    //console.log(`Cart.js cartloader - /status received`);
-    //console.log(`Cart.js cartloader statusRes- ${JSON.stringify(res.data)}`);
-    //304 - not modified or 200
-    if (res.status === 200 || res.status === 304) {
-      //console.log(`Cart.js cartloader - res.status was 200 or 304!`);
-      const customerId = res.data.id;
-      //console.log(`Cart.js cartloader - customerId: ${customerId}`);
 
-      // Use the customer ID to fetch the shopping cart data
-      //console.log(`Cart.js cartloader - Attempting cart /get`);
+    // Check if the response has the necessary data
+    if (res?.id) {
+      const customerId = res.id;
+
       const cartRes = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/shoppingcart/customer/${customerId}`,
         { credentials: "include" }
       );
-      //console.log(`Cart.js cartloader - cartRes: ${JSON.stringify(cartRes)}`);
+
       if (cartRes.ok) {
-        //console.log(`Cart.js cartloader cartRes was ok!`);
         const cartData = await cartRes.json();
-        //console.log(`Cart.js cartloader cartData: ${JSON.stringify(cartData)}`);
         return { cartData };
       } else {
         throw new Error("Unexpected status code.");
       }
+    } else {
+      throw new Error("Failed to retrieve user status.");
     }
   } catch (error) {
+    console.error(`cartLoader - error: ${error}`);
     return {
-      cartLoaderError:
-        "Your cart could not be loaded. Please try again later.",
+      cartLoaderError: "Your cart could not be loaded. Please try again later.",
+      cartData: null
     };
   }
 }
@@ -59,11 +52,7 @@ export function Cart() {
   const { cartData, cartLoaderError } = useLoaderData();
   const removalResult = useActionData();
 
-  // console.log(`Cart.js - authData id: ${authData?.jsonData?.id}`);
-  // console.log(`Cart.js - authData email: ${authData.jsonData?.email_address}`);
-  // console.log(`Cart.js - authData auth method: ${authData?.jsonData?.auth_method}`);
-  // console.log(`Cart.js - authData logged in: ${authData?.jsonData?.logged_in}`);
-  console.log("Cart Data from:", cartData); 
+  console.log("Cart Data from:", cartData);
 
   if (!authData?.logged_in) {
     return (
@@ -78,23 +67,15 @@ export function Cart() {
   }
 
   function renderRemovalMessage() {
-    console.log(`Cart.js renderRemovalMessage - Attempting renderRemovalMessage 22222222`);
-    console.log("Cart.js renderRemovalMessage - removalResult:", removalResult);
-
     if (!removalResult) {
-      console.log("removalResult = null");
       return null;
     }
-    const { error, productId, productName, cart_id } = removalResult; //= useActionData()
+    const { error, productId, productName } = removalResult;
     let message;
     if (error) {
-      console.log(`Cart.js 33333- renderRemovalMessage error occured:`, error)
       message = `'${productName}' couldn't be removed from your cart.`;
     } else {
-      console.log(
-        `Cart.js - renderRemovalMessage calling getproductDetailPath - 120`
-      );
-      const productPath = getProductDetailPath(productId, productName); // LINK? Not here
+      const productPath = getProductDetailPath(productId, productName);
       message = (
         <>
           '<InlineLink path={productPath} anchor={productName} />' was removed
@@ -108,7 +89,7 @@ export function Cart() {
       </p>
     );
   }
-  // Calculate subtotal
+
   const subtotal = cartData.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0);
   const totalItems = cartData.reduce((total, item) => total + item.quantity, 0);
 
@@ -126,13 +107,8 @@ export function Cart() {
         ) : null}
       </p>
       {removalResult ? renderRemovalMessage() : null}
-      {renderOrderItems(cartData, cartLoaderError)}{" "}
-      {/*slugify errors if cartData doesn't have productName, needed to add JOIN to cart queries to products for productName!*/}
-      {/* Test goes here*/}
-      
-        <strong><p>Total: £{subtotal.toFixed(2)} ({totalItems} items)</p></strong>
-      
-      {/* Test end  */}
+      {renderOrderItems(cartData, cartLoaderError)}
+      <strong><p>Total: £{subtotal.toFixed(2)} ({totalItems} items)</p></strong>
       {cartData?.length > 0 ? (
         <Link to="/checkout" className={globalStyles.button}>
           Go to checkout
@@ -141,8 +117,6 @@ export function Cart() {
     </div>
   );
 }
-
-
 
 
 // Test stuff

@@ -7,7 +7,7 @@ export async function authLoader() {
   try {
     
     console.log(`App.js - Fetching auth/status`);
-    console.log(`App.js - process.env.REACT_APP_API_BASE_URL: ${process.env.REACT_APP_API_BASE_URL}`); //The mistake was that somehow v1 became vl for my env variable, how did that possibly happen!?
+    console.log(`App.js - process.env.REACT_APP_API_BASE_URL: ${process.env.REACT_APP_API_BASE_URL}`); 
     //const token = localStorage.getItem('token');
     //console.log(`App.js - token is: ${token}`);
     const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/status`, {
@@ -19,7 +19,7 @@ export async function authLoader() {
     
     // Testing
     console.log(`App.js - res.data results printed as authData:`);
-    //console.log(res); // returns object with data: auth_method: null, email_address: null, id: null, logged_in: false, 
+    console.log(res); // returns object with data: auth_method: null, email_address: null, id: null, logged_in: false, 
     // Testing end 
 
     if (res.status === 200) {

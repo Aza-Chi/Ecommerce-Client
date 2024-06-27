@@ -8,11 +8,11 @@ export async function authLoader() {
     
     console.log(`App.js - Fetching auth/status`);
     console.log(`App.js - process.env.REACT_APP_API_BASE_URL: ${process.env.REACT_APP_API_BASE_URL}`); 
-    //const token = localStorage.getItem('token');
-    //console.log(`App.js - token is: ${token}`);
+    const token = localStorage.getItem('token');
+    console.log(`App.js - token is: ${token}`);
     const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/status`, {
       headers: {
-        //'Authorization': `Bearer ${token}`, // Include JWT token as Bearer token
+        'Authorization': `Bearer ${token}`, // Include JWT token as Bearer token
       },
       withCredentials: true, // If needed for CORS with credentials
     });

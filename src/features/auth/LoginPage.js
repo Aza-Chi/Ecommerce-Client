@@ -23,13 +23,16 @@ export async function loginAction({ request }) {
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
     console.log("LoginPage: Received this response: ");
-    console.log(response);
-    console.log(response.data);
-    console.log(`response.cookie`);
-    console.log(response.cookie);
-    // console.log(response.data.token);
-    // localStorage.setItem('token', response.data.token);
-    // console.log(localStorage.getItem('token'));
+    console.log(`LoginPage.js - response: `, response);
+    console.log(`LoginPage.js - response.data: `, response.data);
+    // console.log(`LoginPage.js - response.cookie: `,response.cookie);
+    //  console.log(`1111 LoginPage.js - response.data.token `,response.data.token);
+    //  console.log(`LoginPage.js - response.token: `, response.token);
+     console.log(`LoginPage.js - response.data.jsonData: `, response.data.jsonData);
+     console.log(`LoginPage.js - response.data.jsonData.token: `, response.data.jsonData.token);
+     localStorage.setItem('token', response.data.jsonData.token);
+     console.log(localStorage.getItem('token'));
+     
     // const authData = response.data;
     
     // console.log(response.data.token); // For JWT 

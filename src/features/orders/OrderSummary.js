@@ -6,7 +6,7 @@ import { getStatusString } from "./utils";
 
 export default function OrderSummary({ orderData, lastItem }) {
   const { order_id, created_at, status_id, total_amount, customer_id } = orderData;
-  console.log(`OrderSummary.js - orderData:`, orderData);
+  //console.log(`OrderSummary.js - orderData:`, orderData);
   const formattedDate = formatDate(created_at);
   const orderDetailsPath = `/orders/${order_id}`;
 

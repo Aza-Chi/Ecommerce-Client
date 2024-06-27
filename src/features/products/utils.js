@@ -39,10 +39,17 @@ export function formatDate(timestamp) {
 
 export async function getStatus() {
   try {
+    const token = localStorage.getItem('token'); // Retrieve token from storage
+    if (!token) {
+      throw new Error("No token found in storage");
+    }
+
     const res = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/auth/status`,
       {
-        headers: {},
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include JWT token as Bearer token
+        },
         withCredentials: true, // If needed for CORS with credentials
       }
     );

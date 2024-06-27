@@ -7,26 +7,20 @@ import {
 
 import InlineErrorPage from "../../components/InlineErrorPage/InlineErrorPage";
 import InlineLink from "../../components/InlineLink/InlineLink";
-import { getProductDetailPath } from "../products/utils";
+import { getProductDetailPath, getStatus } from "../products/utils";
 import { renderOrderItems } from "./utils";
 import globalStyles from "../../App.module.css";
 import axios from "axios";
 
+
 // https://reactrouter.com/en/main/start/tutorial#loading-data
 // https://reactrouter.com/en/main/route/loader
 export async function cartLoader() {
+  
   try {
     // Call the status route to get the customer ID
     //console.log(`Cart.js - attempting /status`);
-    const res = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/auth/status`,
-      {
-        headers: {
-          //'Authorization': `Bearer ${token}`, // Include JWT token as Bearer token
-        },
-        withCredentials: true, // If needed for CORS with credentials
-      }
-    );
+    const res = await getStatus();
     //console.log(`Cart.js cartloader - /status received`);
     //console.log(`Cart.js cartloader statusRes- ${JSON.stringify(res.data)}`);
     //304 - not modified or 200

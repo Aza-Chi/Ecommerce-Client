@@ -19,7 +19,7 @@ export async function addToCartAction({ request, params }) {
   const formData = await request.formData();
   const quantity = parseInt(formData.get("quantity"), 10);
   const res = await getStatus();
-  const customer_id = res.jsonData.id;
+  const customer_id = res.id;
   const product_id = parseInt(params.id);
 
   try {
@@ -130,7 +130,7 @@ export function ProductDetail() {
           <em>Out of stock</em>
         </p>
       );
-    } else if (authData.jsonData.logged_in) {
+    } else if (authData.logged_in) {
       return (
         <Form method="post">
           <label htmlFor="quantity" className={styles.quantityLabel}>

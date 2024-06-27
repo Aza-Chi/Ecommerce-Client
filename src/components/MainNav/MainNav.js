@@ -21,8 +21,9 @@ export default function MainNav() {
       if (!res.ok) {
         throw new Error("Unexpected status code.");
       }
-      console.log(`MainNav.js  Logout - res data ${res.jsonData} `);
-      authData.jsonData.logged_in = false;
+      console.log(`MainNav.js  Logout - res jsondata ${res.jsonData} `);
+      console.log(`MainNav.js  Logout - res  ${res} `);
+      authData.logged_in = false;
     } catch (error) {
       console.log(error);
     } finally {
@@ -53,7 +54,7 @@ export default function MainNav() {
       </ul>
       
       <SearchBar />
-      {authData.jsonData?.logged_in ?
+      {authData.logged_in ?
       <ul className={styles.navList}>
         {renderNavItem("/account", "Account")}
         {renderNavItem("/addresses", "Addresses")}

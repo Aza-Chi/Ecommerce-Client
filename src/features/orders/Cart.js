@@ -32,7 +32,7 @@ export async function cartLoader() {
     //304 - not modified or 200
     if (res.status === 200 || res.status === 304) {
       //console.log(`Cart.js cartloader - res.status was 200 or 304!`);
-      const customerId = res.data.jsonData.id;
+      const customerId = res.data.id;
       //console.log(`Cart.js cartloader - customerId: ${customerId}`);
 
       // Use the customer ID to fetch the shopping cart data
@@ -71,7 +71,7 @@ export function Cart() {
   // console.log(`Cart.js - authData logged in: ${authData?.jsonData?.logged_in}`);
   console.log("Cart Data from:", cartData); 
 
-  if (!authData?.jsonData?.logged_in) {
+  if (!authData?.logged_in) {
     return (
       <InlineErrorPage
         pageName="Cart"
@@ -121,7 +121,7 @@ export function Cart() {
   return (
     <div className={globalStyles.pagePadding}>
       <h1 className={globalStyles.h1}>Cart</h1>
-      <p>You are logged in as {authData.jsonData.email_address}.</p>
+      <p>You are logged in as {authData.email_address}.</p>
       <p>
         {cartData?.length > 0 ? (
           <>

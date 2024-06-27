@@ -125,7 +125,7 @@ export function OrderDetailsPage({ checkoutSuccess }) {
   const authData = useRouteLoaderData("app");
   const { orderDataWithProductName, addressResJson, error } = useLoaderData();
 
-  if (!authData.jsonData.logged_in) {
+  if (!authData.logged_in) {
     return <InlineErrorPage pageName="Order details" type="login_required" loginRedirect="/orders" />;
   } else if (error) {
     return <InlineErrorPage pageName="Order details" message={error} />;

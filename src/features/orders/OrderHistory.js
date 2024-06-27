@@ -3,27 +3,35 @@ import OrderSummary from "./OrderSummary";
 import { getStatus } from "../products/utils";
 
 export async function ordersLoader() {
-  // https://reactrouter.com/en/main/start/tutorial#loading-data
-  // https://reactrouter.com/en/main/route/loader
-  const res = await getStatus();
-  
-  const customer_id = res.jsonData.id; // Replace with actual customer_id as needed, customer id 0 doesn't exist so good test 
-console.log(`OrderHistory.js - customer_id: `, customer_id);
   try {
-    const res = await fetch(
+    // Fetch the auth status
+    const statusRes = await getStatus();
+    
+    // Check if jsonData exists and contains the id property
+    if (!statusRes || !statusRes.id) {
+      throw new Error("Customer ID not found in auth status response.");
+    }
+
+    const customer_id = statusRes.id;
+    console.log(`OrderHistory.js - customer_id: `, customer_id);
+
+    // Fetch orders for the customer
+    const ordersRes = await fetch(
       `${process.env.REACT_APP_API_BASE_URL}/orders/customer/${customer_id}`,
       { credentials: "include" }
     );
-    if (res.ok) {
-      const ordersData = await res.json();
+
+    if (ordersRes.ok) {
+      const ordersData = await ordersRes.json();
       return { ordersData };
+    } else {
+      throw new Error(`Unexpected status code: ${ordersRes.status}`);
     }
-    throw new Error("Unexpected status code.");
   } catch (error) {
+    console.error('ordersLoader error:', error);
     return { error: "Error: Orders could not be retrieved. Please try again later." };
   }
 }
-
 
 export function OrdersHistory() {
   // https://reactrouter.com/en/main/hooks/use-loader-data

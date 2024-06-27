@@ -18,19 +18,19 @@ export default function AddressPage() {
   //console.log(`AccountPage.js - authData: ${authData.jsonData.logged_in}`);
   //console.log(`AccountPage.js - authData: logged in? ${authData.logged_in}`);
 
-  if (!authData || !authData.jsonData.logged_in) {
+  if (!authData || !authData.logged_in) {
     //console.log('AccountPage.js - authData: not logged in!', authData);
     console.log(("Checking if !authData.logged_in, it should be true"));
     console.log((!authData.logged_in)); //true then returns this fail page 
     return <InlineErrorPage pageName="Your account" type="login_required" />;
     
 
-  } else if (authData.jsonData.logged_in)   {
+  } else if (authData.logged_in)   {
     console.log('AddressPage.js - authData: logged in!', authData);
     return (
       <div className={globalStyles.pagePadding}>
         <h1 className={globalStyles.h1}>Your Addresses</h1>
-        <p>You are logged in as {authData.jsonData.email_address}.</p>
+        <p>You are logged in as {authData.email_address}.</p>
         <p className={globalStyles.mb3rem}>
           View your addresses below or add a new address below.
           {/* <InlineLink path="/addaddress" anchor="add a new address" /> */}

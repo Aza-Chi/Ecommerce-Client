@@ -38,21 +38,25 @@ export function formatDate(timestamp) {
 }
 
 export async function getStatus() {
-  const res = await axios.get(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/status`,
-    {
-      headers: {},
-      withCredentials: true, // If needed for CORS with credentials
-    }
-  );
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_URL}/auth/status`,
+      {
+        headers: {},
+        withCredentials: true, // If needed for CORS with credentials
+      }
+    );
 
-  if (res.status === 200 || res.status === 304) {
-    //console.log(`products/utils.js getStatus() - res.status was 200 or 304!`);
-    //console.log(`products/utils.js getStatus() - res.data:`, res.data);
-    return res.data;
-  } else {
-    console.log(`products/utils.js - getStatus() ERROR!`);
-    throw new Error("Unexpected status code.");
+    if (res.status === 200 || res.status === 304) {
+      console.log(`getStatus() - res.data:`, res.data);
+      return res.data;
+    } else {
+      console.log(`getStatus() - Unexpected status code: ${res.status}`);
+      throw new Error("Unexpected status code.");
+    }
+  } catch (error) {
+    console.error(`getStatus() - error: ${error}`);
+    throw error;
   }
 }
 

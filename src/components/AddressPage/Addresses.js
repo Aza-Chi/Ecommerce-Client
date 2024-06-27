@@ -9,7 +9,7 @@ export async function addressLoader() {
   // https://reactrouter.com/en/main/route/loader
   const res = await getStatus();
   
-  const customer_id = res.jsonData.id; 
+  const customer_id = res.id; 
 console.log(`Addresses.js - customer_id: `, customer_id);
   try {
     const res = await fetch(

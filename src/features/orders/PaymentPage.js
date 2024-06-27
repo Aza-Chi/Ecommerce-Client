@@ -62,7 +62,7 @@ export default function PaymentPage() {
   }, [order_id]);
   /* Rewrite End */
 
-  if (!authData || !authData.jsonData.logged_in) {
+  if (!authData || !authData.logged_in) {
     return (
       <InlineErrorPage
         pageName="Order failed"

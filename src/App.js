@@ -2,38 +2,12 @@ import { Outlet } from "react-router-dom";
 import Header from './components/Header/Header';
 import axios from 'axios';
 
-//Fetch authLoader 
-// export async function authLoader() {
-//   // https://reactrouter.com/en/main/start/tutorial#loading-data
-//   // https://reactrouter.com/en/main/route/loader
-//   try {
-//     console.log(`Fetching auth/status`)
-//     const res = await fetch(
-//       `${process.env.REACT_APP_API_BASE_URL}/auth/status`,
-//       { credentials: "include" }
-//     );
-//     //testing
-//     console.log(res);
-//     //Need to set logged in to true ! 
-//     //testing end 
-//     if (res.ok) {
-//       const authData = await res.json();
-//       console.log("authData: ");
-//       console.log(authData);
-//       return authData;
-//     }
-//     throw new Error("Unexpected status code.");
-//   } catch (error) {
-//     return { logged_in: false, id: null, email_address: null, auth_method: null };
-//   }
-// }
-
-//Axio authLoader 
 
 export async function authLoader() {
   try {
     
     console.log(`App.js - Fetching auth/status`);
+    console.log(`App.js - process.env.REACT_APP_API_BASE_URL: ${process.env.REACT_APP_API_BASE_URL}`); //The mistake was that somehow v1 became vl for my env variable, how did that possibly happen!?
     //const token = localStorage.getItem('token');
     //console.log(`App.js - token is: ${token}`);
     const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/status`, {
@@ -52,6 +26,8 @@ export async function authLoader() {
       const authData = res.data;
       console.log('App.js - res.status=== 200:');
       console.log('App.js - authData:', authData);
+      console.log('App.js - authData.logged_in:', authData.logged_in);
+
       
       return authData;
     }
@@ -74,19 +50,3 @@ export function App() {
     </div>
   );
 }
-
-
-// <header className="App-header">
-// <img src={logo} className="App-logo" alt="logo" />
-// <p>
-//   Edit <code>src/App.js</code> and save to reload.
-// </p>
-// <a
-//   className="App-link"
-//   href="https://reactjs.org"
-//   target="_blank"
-//   rel="noopener noreferrer"
-// >
-//   Learn React
-// </a>
-// </header>

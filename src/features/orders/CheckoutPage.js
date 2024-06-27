@@ -33,7 +33,7 @@ post order details
 export async function checkoutAction({ request }) {
   /* Get customer_id */
   const res = await getStatus();
-  const customer_id = res.jsonData.id;
+  const customer_id = res.id;
 
   let formData = await request.formData();
   const total_amount = formData.get("totalCost");
@@ -115,7 +115,7 @@ export function CheckoutPage() {
   useEffect(() => {
     async function fetchAddresses() {
       const res = await getStatus();
-      const customer_id = res.jsonData.id;
+      const customer_id = res.id;
 
       const response = await getAddressesByCustomerId(customer_id);
       //console.log(`response`, response); This one!
@@ -126,7 +126,7 @@ export function CheckoutPage() {
     fetchAddresses();
   }, []);
 
-  if (!authData || !authData.jsonData.logged_in) {
+  if (!authData || !authData.logged_in) {
     return (
       <InlineErrorPage
         pageName="Checkout"

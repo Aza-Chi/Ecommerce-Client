@@ -10,7 +10,6 @@ import styles from "../../App.module.css";
 export default function AccountPage() {
   // https://reactrouter.com/en/main/hooks/use-route-loader-data
   const authData = useRouteLoaderData("app");
-  console.log(`AccountPage.js - authData: ${authData.logged_in}`);
   console.log(`AccountPage.js - authData: logged in? ${authData.logged_in}`);
 
   if (!authData || !authData.logged_in) {

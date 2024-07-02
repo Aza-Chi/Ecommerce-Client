@@ -92,6 +92,9 @@ export function LoginPage() {
       <FacebookAuthButton />
       <p>{isGoogleError ? googleError : null}</p>
       <p>{isFacebookError ? facebookError : null}</p>
+      <p>Try the test user login:</p>
+      <p>Email: TestUser@example.com</p>
+      <p>Password: password</p>
     </div>
   );
 }

@@ -24,10 +24,12 @@ export async function addToCartAction({ request, params }) {
 
   try {
     // Fetch product details to check stock quantity
+    console.log(`productDetail.js addToCartAction- attempting get productData`);
     const productRes = await fetch(
       `${process.env.REACT_APP_API_BASE_URL}/products/${product_id}`
     );
     const productData = await productRes.json();
+    console.log(`productDetail.js addToCartAction- productData: `, productData);
     const stock_quantity = productData[0].stock_quantity;
 
     if (quantity > stock_quantity) {

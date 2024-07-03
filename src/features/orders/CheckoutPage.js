@@ -96,7 +96,7 @@ export async function checkoutAction({ request }) {
     }
     /* End */
   } catch (error) {
-    console.log(`CheckoutPage.js ERROR !!!`);
+    console.log(`CheckoutPage.js - checkout action error: `, error);
     return {
       checkoutError:
         "Sorry, your order could not be completed. Please try again later.",
